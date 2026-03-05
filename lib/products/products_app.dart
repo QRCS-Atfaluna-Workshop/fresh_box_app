@@ -1,275 +1,448 @@
-// import 'package:flutter/material.dart';
-// import 'package:pro/products/products_models.dart';
-// import 'package:pro/products/products_widgets.dart';
 
 
-// void main() => runApp(const ProductsApp());
+import 'package:flutter/material.dart';
+import 'package:pro/products/notifications_screen.dart';
 
-// class ProductsApp extends StatelessWidget {
-//   const ProductsApp({super.key});
+void main() => runApp( MyApp());
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//         fontFamily: 'sans-serif',
-//         scaffoldBackgroundColor: AppColors.bg,
-//         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
-//         useMaterial3: true,
-//       ),
-//       home: const MainNavigation(),
-//     );
-//   }
-// }
+class MyApp extends StatelessWidget {
+   const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4CAF50)),
+        useMaterial3: true,
+      ),
+      home:  MoreScreen(),
+    );
+  }
+}
 
-// class CartState extends ChangeNotifier {
-//   final List<CartItem> items = [];
-//   void add(ProductsItem food) {
-//     final idx = items.indexWhere((e) => e.food.id == food.id);
-//     if (idx >= 0) {
-//       items[idx].quantity++;
-//     } else {
-//       items.add(CartItem(food: food));
-//     }
-//     notifyListeners();
-//   }
-//   int get totalItems => items.fold(0, (s, e) => s + e.quantity);
-// }
 
-// class MainNavigation extends StatefulWidget {
-//   const MainNavigation({super.key});
+class Product {
+  final String name;
+  final String weight;
+  final String price;
+  final String category;
+  final String description;
 
-//   @override
-//   State<MainNavigation> createState() => _MainNavigationState();
-// }
+  const Product({
+    required this.name,
+    required this.weight,
+    required this.price,
+    required this.category,
+    required this.description,
+  });
+}
 
-// class _MainNavigationState extends State<MainNavigation> {
-//   int _index = 0;
-//   final _cart = CartState();
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final screens = [
-//       PopularProductsScreen(cart: _cart),
-//       const NotificationsScreen(),
-//       const Center(child: Text('Orders')),
-//       const MoreScreen(),
-//     ];
+class MoreScreen extends StatelessWidget {
+   const MoreScreen({super.key});
+  static const _menuItems = [
+    (Icons.edit_outlined, 'Edit Profile'),
+    (Icons.location_on_outlined, 'My Address'),
+    (Icons.shopping_basket_outlined, 'My Orders'),
+    (Icons.flash_on_outlined, 'My Wishlist'),
+    (Icons.chat_bubble_outline, 'Chat with us'),
+    (Icons.phone_outlined, 'Talk to our Support'),
+    (Icons.mail_outline, 'Mail to us'),
+    (Icons.facebook_outlined, 'Message to facebook page'),
+  ];
 
-//     return Scaffold(
-//       body: IndexedStack(index: _index, children: screens),
-//       bottomNavigationBar: BottomNavigationBar(
-//         currentIndex: _index,
-//         onTap: (i) => setState(() => _index = i),
-//         type: BottomNavigationBarType.fixed,
-//         selectedItemColor: AppColors.primary,
-//         unselectedItemColor: AppColors.grey,
-//         items: const [
-//           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
-//           BottomNavigationBarItem(icon: Icon(Icons.notifications_none), label: 'Notifications'),
-//           BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'Orders'),
-//           BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'More'),
-//         ],
-//       ),
-//     );
-//   }
-// }
+// late TextEditingController textcontroller;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 12),
+              child: Text(
+                'More',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+            ),
+            // User card
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+CircleAvatar(
+  radius: 28,
+  backgroundImage: NetworkImage(
+    "https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=1000",
+  ),
+)
+,                   SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Maha Abu Khater',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.green),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Text('0567000000',
+                            style: TextStyle(fontSize: 13)),
+                    
+                      ),
+//                     TextField(
+//                       decoration: InputDecoration(labelText: "data", labelStyle: TextStyle(fontSize: 13, color: Colors.grey),
+//                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(4)),
+//                     contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+//                 error: errorhint,     ),controller: textcontroller,
+//                       onChanged: (value) {
+//                    print(value);
+//    } 
+//    ) , 
+//    ElevatedButton(onPressed: 
+//    (){
+//  if (textcontroller.text.isEmpty) {
+//                       errorhint = Text("Please enter a value");
+//                     } else {
+//                       errorhint = null;
+//                     }
+//    }
+//    , child: Text("data"))
+     ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            // Menu list
+            Expanded(
+              child: ListView.separated(
+                itemCount: _menuItems.length + 1, 
+                separatorBuilder: (_, __) =>
+                    const Divider(height: 1, indent: 20, endIndent: 20),
+                itemBuilder: (context, index) {
+                  if (index == _menuItems.length) {
+                    return _MenuItem(
+                      icon: Icons.power_settings_new,
+                      label: 'Log out',
+                      iconColor: Colors.red,
+                      onTap: () {},
+                    );
+                  }
+                  final item = _menuItems[index];
+                  Color color = Colors.blue;
+                  return _MenuItem(
+                    icon: item.$1,
+                    label: item.$2,
+                    iconColor: color,
+                    onTap: index == 0
+                        ? () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const ProductDetailsScreen(
+                                  product: Product(
+                                    name: 'Aria DANO Full Cream Milk Powder Instant',
+                                    weight: '1 KG',
+                                    price: '\$182',
+                                    category: 'Dairy Products',
+                                    description:
+                                        'Et quidem faciunt, ut summum bonum sit extremum et rationibus conqui sites de voluptate. Sed ut summum bonum sit id.',
+                                  ),
+                                ),
+                              ),
+                            )
+                        : () {
+                               Navigator.push(context, MaterialPageRoute(builder: (_) =>  NotificationsScreen()));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login Successful!'), backgroundColor: Colors.green),
+        );
+                        }
+                        ,
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-// class PopularProductsScreen extends StatefulWidget {
-//   final CartState cart;
-//   const PopularProductsScreen({super.key, required this.cart});
+class _MenuItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color iconColor;
+  final VoidCallback onTap;
 
-//   @override
-//   State<PopularProductsScreen> createState() => _PopularProductsScreenState();
-// }
+  const _MenuItem({
+    required this.icon,
+    required this.label,
+    required this.iconColor,
+    required this.onTap,
+  });
 
-// class _PopularProductsScreenState extends State<PopularProductsScreen> {
-//   final _favorites = <String>{};
-//   final List<ProductsItem> _popularItems = [
-//     const ProductsItem(id: '1', name: 'Arla DANO Full Cream Milk Powder Instant', description: 'Full Cream Milk', price: 182.0, imageUrl: 'https://images.unsplash.com/photo-1550583724-125581f77833?w=400', discount: 50, weight: '1 KG', category: ProductsCategory.dairy),
-//     const ProductsItem(id: '2', name: 'Marinated Grilled Burger', description: 'Juicy beef', price: 120.0, imageUrl: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400', category: ProductsCategory.burgers),
-//     const ProductsItem(id: '3', name: 'Fresh Salad with Letuce', description: 'Garden fresh', price: 80.0, imageUrl: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400', category: ProductsCategory.salads),
-//     const ProductsItem(id: '4', name: 'Fresh Salad Green berry', description: 'Mixed berry', price: 90.0, imageUrl: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400', discount: 40, category: ProductsCategory.salads),
-//   ];
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(icon, color: iconColor, size: 22),
+      title: Text(label, style: const TextStyle(fontSize: 15)),
+      onTap: onTap,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+      dense: true,
+    );
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Popular Food', style: TextStyle(fontWeight: FontWeight.bold))),
-//       body: GridView.builder(
-//         padding: const EdgeInsets.all(16),
-//         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16, childAspectRatio: 0.85),
-//         itemCount: _popularItems.length,
-//         itemBuilder: (_, i) => ProductsCard(
-//           item: _popularItems[i],
-//           isFavorite: _favorites.contains(_popularItems[i].id),
-//           onFavorite: () => setState(() => _favorites.contains(_popularItems[i].id) ? _favorites.remove(_popularItems[i].id) : _favorites.add(_popularItems[i].id)),
-//           onAdd: () => setState(() => widget.cart.add(_popularItems[i])),
-//           onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetailsScreen(item: _popularItems[i]))),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
-// class NotificationsScreen extends StatelessWidget {
-//   const NotificationsScreen({super.key});
+class ProductDetailsScreen extends StatelessWidget {
+  final Product product;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Notifications', style: TextStyle(fontWeight: FontWeight.bold)), centerTitle: false),
-//       body: ListView(
-//         padding: const EdgeInsets.all(16),
-//         children: const [
-//           NotificationTile(title: 'Order #345', message: 'Your Order is Confirmed. Please check everything is okay', time: '2:57 PM', icon: Icons.shopping_bag, iconBgColor: Colors.orange, isHighlighted: true),
-//           NotificationTile(title: 'Order #345', message: 'Your Order is Delivering to your home', time: '2:33 PM', icon: Icons.phone, iconBgColor: Colors.green),
-//           NotificationTile(title: 'Order #345', message: 'Your Order is Confirmed. Please check everything is okay', time: '4:12 AM', icon: Icons.shopping_bag, iconBgColor: Colors.red),
-//           NotificationTile(title: 'Order #345', message: 'Your Order is Completed. Please rate the experience', time: '12:07 AM', icon: Icons.star, iconBgColor: Colors.green),
-//           NotificationTile(title: 'Order #345', message: 'Your Order is Confirmed. Please check everything is okay', time: '11:51 AM', icon: Icons.shopping_bag, iconBgColor: Colors.red),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  const ProductDetailsScreen({super.key, required this.product});
 
-// class MoreScreen extends StatelessWidget {
-//   const MoreScreen({super.key});
+  static final _relatedProducts = [
+    const Product(
+      name: 'Nestle Nido Full Cream Milk Powder Instant',
+      weight: '5 KG',
+      price: '\$270',
+      category: '',
+      description: 'Nestle Nido Full Cream Milk Powder InstantNestle Nido Full Cream Milk Powder Instant',
+    ),
+    const Product(
+      name: 'Nestle Nido Full Cream Milk Powder ',
+      weight: '',
+      price: '\$270',
+      category: '',
+      description: 'Nestle Nido Full Cream Milk Powder InstantNestle Nido Full Cream Milk Powder Instant',
+    ),
+  ];
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: SafeArea(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             const Padding(padding: EdgeInsets.all(20), child: Text('More', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
-//             Padding(
-//               padding: const EdgeInsets.symmetric(horizontal: 20),
-//               child: Row(
-//                 children: [
-//                   const CircleAvatar(radius: 28, backgroundImage: NetworkImage('https://via.placeholder.com/150')),
-//                   const SizedBox(width: 12),
-//                   Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-//                     const Text('Shafikul Islam', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-//                     const Text('01XXXXXXXXXXX', style: TextStyle(fontSize: 13, color: AppColors.grey)),
-//                   ]),
-//                 ],
-//               ),
-//             ),
-//             const SizedBox(height: 24),
-//             Expanded(
-//               child: ListView(
-//                 children: [
-//                   CustomMenuItem(icon: Icons.edit_outlined, label: 'Edit Profile', iconColor: Colors.blue, onTap: () {}),
-//                   CustomMenuItem(icon: Icons.location_on_outlined, label: 'My Address', iconColor: Colors.blue, onTap: () {}),
-//                   CustomMenuItem(icon: Icons.shopping_basket_outlined, label: 'My Orders', iconColor: Colors.blue, onTap: () {}),
-//                   CustomMenuItem(icon: Icons.flash_on_outlined, label: 'My Wishlist', iconColor: Colors.blue, onTap: () {}),
-//                   CustomMenuItem(icon: Icons.chat_bubble_outline, label: 'Chat with us', iconColor: Colors.green, onTap: () {}),
-//                   CustomMenuItem(icon: Icons.phone_outlined, label: 'Talk to our Support', iconColor: Colors.orange, onTap: () {}),
-//                   CustomMenuItem(icon: Icons.mail_outline, label: 'Mail to us', iconColor: Colors.blue, onTap: () {}),
-//                   CustomMenuItem(icon: Icons.facebook_outlined, label: 'Message to facebook page', iconColor: Colors.blue, onTap: () {}),
-//                   CustomMenuItem(icon: Icons.power_settings_new, label: 'Log out', iconColor: Colors.red, onTap: () {}),
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text('Product Details',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+  height: 220,
+  width: double.infinity,
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(12),
+    border: Border.all(color: Colors.green, width: 2),
+    image: DecorationImage(
+      image: NetworkImage(
+        "https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=1000",
+      ),
+      fit: BoxFit.cover,
+    ),
+  ),
+)
+                  // Container(
+                    
+                  ,
+              //     Container(
+              //       padding: const EdgeInsets.all(2),
+                    
+              //       height: 220,
+              //       width: double.infinity,
+              //       decoration: BoxDecoration(
+              //         color: product.imageColor,
+              //         borderRadius: BorderRadius.circular(12),
+              //         border: Border.all(color: Colors.green, width: 2),
+              //       ),
+              //       child: Image.network(
+              //   "https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=1000",
+              //   width: double.infinity,
+              //   fit: BoxFit.cover,
+              // ),
+              //       //const Center(
+              //       //   child: Icon(Icons.image, size: 80, color: Colors.grey),
+              //       // ),
+              //     ),
+                  const SizedBox(height: 12),
+                  // Thumbnail row
+                  Row(
+                    children: List.generate(
+                      2,
+                      (i) => Container(
+                        margin: const EdgeInsets.only(right: 8),
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE8F5E9),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
+                        child: Image.network(
+                "https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=1000",
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+                      
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  // Name & price row
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          product.name,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        product.price,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green),
+                      ),
+                    ],
+                  ),
+                  Text(product.weight,
+                      style: const TextStyle(
+                          color: Colors.grey, fontWeight: FontWeight.w500)),
+                  const SizedBox(height: 8),
+                  // Category
+                  Row(
+                    children: [
+                      const Icon(Icons.grid_view,
+                          size: 16, color: Colors.green),
+                      const SizedBox(width: 4),
+                      Text(product.category,
+                          style: const TextStyle(
+                              color: Colors.green, fontSize: 13)),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  // Description
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.menu, size: 16, color: Colors.grey),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(product.description,
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.black87)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  const Text('You can also check this items',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 14)),
+                  const SizedBox(height: 12),
+                  // Related products
+                  ..._relatedProducts.map((p) => _RelatedProductCard(product: p)),
+                ],
+              ),
+            ),
+          ),
+          // Add to Bag button
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.shopping_bag_outlined),
+                label: const Text('Add to Bag'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  textStyle: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-// class ProductDetailsScreen extends StatelessWidget {
-//   final ProductsItem item;
-//   const ProductDetailsScreen({super.key, required this.item});
+class _RelatedProductCard extends StatelessWidget {
+  final Product product;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       appBar: AppBar(backgroundColor: Colors.white, elevation: 0, leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.black), onPressed: () => Navigator.pop(context)), title: const Text('Product Details', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold))),
-//       body: Column(
-//         children: [
-//           Expanded(
-//             child: SingleChildScrollView(
-//               padding: const EdgeInsets.all(16),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Center(
-//                     child: Container(
-//                       height: 220, width: 220,
-//                       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
-//                       child: Image.network(item.imageUrl, fit: BoxFit.contain),
-//                     ),
-//                   ),
-//                   const SizedBox(height: 16),
-//                   Row(
-//                     children: [
-//                       _thumb(item.imageUrl, isSelected: true),
-//                       _thumb(item.imageUrl),
-//                     ],
-//                   ),
-//                   const SizedBox(height: 24),
-//                   Text(item.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.text)),
-//                   const SizedBox(height: 12),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(item.weight, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.text)),
-//                       Text('৳${item.price.toInt()}', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.primary)),
-//                     ],
-//                   ),
-//                   const SizedBox(height: 16),
-//                   Row(children: [
-//                     const Icon(Icons.grid_view, size: 16, color: AppColors.grey),
-//                     const SizedBox(width: 8),
-//                     Text(item.categoryName, style: const TextStyle(color: AppColors.grey, fontSize: 14)),
-//                   ]),
-//                   const SizedBox(height: 12),
-//                   Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-//                     const Icon(Icons.menu, size: 16, color: AppColors.grey),
-//                     const SizedBox(width: 8),
-//                     Expanded(child: Text('Et quidem faciunt, ut summum bonum sit extremum et rationibus conqui sites de voluptate. Sed ut summum bonum sit id.', style: const TextStyle(fontSize: 14, color: AppColors.grey, height: 1.5))),
-//                   ]),
-//                   const SizedBox(height: 32),
-//                   const Text('You can also check this items', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-//                   const SizedBox(height: 16),
-//                   RecommendedCard(item: item),
-//                   RecommendedCard(item: item),
-//                 ],
-//               ),
-//             ),
-//           ),
-//           Padding(
-//             padding: const EdgeInsets.all(16),
-//             child: ElevatedButton(
-//               onPressed: () {},
-//               style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, minimumSize: const Size(double.infinity, 56), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), elevation: 0),
-//               child: const Row(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Text('Add to Bag', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-//                   SizedBox(width: 8),
-//                   Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 20),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
+  const _RelatedProductCard({required this.product});
 
-//   Widget _thumb(String url, {bool isSelected = false}) {
-//     return Container(
-//       margin: const EdgeInsets.only(right: 12),
-//       padding: const EdgeInsets.all(4),
-//       decoration: BoxDecoration(border: Border.all(color: isSelected ? AppColors.primary : Colors.grey[300]!, width: 1.5), borderRadius: BorderRadius.circular(8)),
-//       child: Image.network(url, width: 40, height: 40, fit: BoxFit.cover),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 10),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child:Image.network(
+                "https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=1000",
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(product.name,
+                      style: const TextStyle(
+                          fontSize: 13, fontWeight: FontWeight.w500)),
+                  const SizedBox(height: 4),
+                  Text(product.price,
+                      style: const TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

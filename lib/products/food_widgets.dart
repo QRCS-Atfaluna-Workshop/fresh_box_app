@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'food_models.dart';
 
 class AppColors {
-  static const primary = Color(0xFFEE6B51); // اللون البرتقالي من التصميم
+  static const primary = Color(0xFFEE6B51); 
   static const bg = Color(0xFFF8F8F8);
   static const text = Color(0xFF333333);
   static const grey = Color(0xFF9E9E9E);
@@ -26,12 +26,14 @@ class FoodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 300,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
@@ -40,7 +42,7 @@ class FoodCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.network(item.imageUrl, height: 100, width: double.infinity, fit: BoxFit.cover),
+                  child: Image.network(item.imageUrl, height: 200, width: double.infinity, fit: BoxFit.cover),
                 ),
               ),
               if (item.discount != null)
@@ -64,7 +66,6 @@ class FoodCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Text(item.name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: AppColors.text), maxLines: 2, overflow: TextOverflow.ellipsis),
           ),
-          const Spacer(),
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
             child: Row(
