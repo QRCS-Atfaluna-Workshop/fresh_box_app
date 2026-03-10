@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:pro/products/food_app.dart';
-// import 'package:pro/products/login_screen.dart';
+import 'package:pro/products/food_app.dart';
+import 'package:pro/products/login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
 
       if (usernameError == null && emailError == null && passError == null) {
-        // Navigator.push(context, MaterialPageRoute(builder: (_) => const PopularFoodScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (_) => const PopularFoodScreen()));
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Account created successfully!'),
@@ -54,7 +54,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      // ── نفس AppBar اللوغن ──────────────────────
       appBar: AppBar(
         title: const Text(
           "FreshBOX",
@@ -75,7 +74,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              // ── العنوان ───────────────────────────
               const Text(
                 "Let's get Started",
                 style: TextStyle(
@@ -91,7 +89,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 32),
 
-              // ── Username ──────────────────────────
               TextField(
                 controller: usernameController,
                 textInputAction: TextInputAction.next,
@@ -118,7 +115,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 16),
 
-              // ── Email ─────────────────────────────
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -146,7 +142,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 16),
 
-              // ── Password ──────────────────────────
               TextField(
                 controller: passwordController,
                 obscureText: obscure,
@@ -180,7 +175,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 24),
 
-              // ── Sign Up Button ────────────────────
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -202,7 +196,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 20),
 
-              // ── Already have account ──────────────
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -213,7 +206,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
                       },
                       style: TextButton.styleFrom(foregroundColor: Colors.redAccent),
                       child: const Text(
@@ -226,7 +219,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 30),
 
-              // ── OR Divider ────────────────────────
               Row(
                 children: [
                   Expanded(child: Divider(color: Colors.grey.shade300)),
@@ -239,7 +231,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 30),
 
-              // ── Google Button ─────────────────────
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -269,7 +260,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 12),
 
-              // ── Facebook Button ───────────────────
               SizedBox(
                 width: double.infinity,
                 height: 50,
