@@ -200,7 +200,7 @@ class _PopularFoodScreenState extends State<PopularFoodScreen> {
               crossAxisCount: 2,
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
-              childAspectRatio: 1.6,
+              childAspectRatio: 0.7,
             ),
             itemCount: _popularItems.length,
             itemBuilder: (_, i) => FoodCard(
@@ -214,7 +214,7 @@ class _PopularFoodScreenState extends State<PopularFoodScreen> {
               onAdd: () => setState(() => _cart.add(_popularItems[i])),
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

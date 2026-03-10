@@ -1,41 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:pro/products/food_app.dart';
-import 'package:pro/products/sign_up_screen.dart';
+// import 'package:pro/products/food_app.dart';
+// import 'package:pro/products/login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController    = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   bool obscure = true;
+  String? usernameError;
   String? emailError;
   String? passError;
 
-  void login() {
+  void signUp() {
     setState(() {
-      emailError = null;
-      passError = null;
+      usernameError = usernameController.text.isEmpty ? "Please enter username" : null;
 
       if (emailController.text.isEmpty) {
         emailError = "Please enter email";
       } else if (!emailController.text.contains('@')) {
         emailError = "Enter a valid email";
+      } else {
+        emailError = null;
       }
 
       if (passwordController.text.isEmpty) {
         passError = "Please enter password";
       } else if (passwordController.text.length < 6) {
         passError = "Password must be at least 6 characters";
+      } else {
+        passError = null;
       }
 
-      if (emailError == null && passError == null) {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => const PopularFoodScreen()));
+      if (usernameError == null && emailError == null && passError == null) {
+        // Navigator.push(context, MaterialPageRoute(builder: (_) => const PopularFoodScreen()));
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Login Successful!'), backgroundColor: Colors.green),
+          const SnackBar(
+            content: Text('Account created successfully!'),
+            backgroundColor: Colors.green,
+          ),
         );
       }
     });
@@ -45,8 +53,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+
+      // ── نفس AppBar اللوغن ──────────────────────
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "FreshBOX",
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -57,39 +67,67 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
+
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Let's Sign You In",
+
+              // ── العنوان ───────────────────────────
+              const Text(
+                "Let's get Started",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
-                "Welcome back, you've been missed!",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 16,
+                "Create an account to continue!",
+                style: TextStyle(color: Colors.grey[600], fontSize: 16),
+              ),
+              const SizedBox(height: 32),
+
+              // ── Username ──────────────────────────
+              TextField(
+                controller: usernameController,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  labelText: "Username",
+                  hintText: "Create your username",
+                  errorText: usernameError,
+                  prefixIcon: const Icon(Icons.person_outline, color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey.shade50,
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 16),
 
+              // ── Email ─────────────────────────────
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  labelText: "Username or E-mail",
-                  hintText: "Enter your username or e-mail",
+                  labelText: "Email Id",
+                  hintText: "Enter your e-mail",
                   errorText: emailError,
-                  prefixIcon: Icon(Icons.person_outline, color: Colors.grey),
+                  prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: Colors.grey.shade300),
@@ -100,32 +138,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.redAccent, width: 2),
+                    borderSide: const BorderSide(color: Colors.redAccent, width: 2),
                   ),
                   filled: true,
                   fillColor: Colors.grey.shade50,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
+              // ── Password ──────────────────────────
               TextField(
                 controller: passwordController,
                 obscureText: obscure,
                 decoration: InputDecoration(
                   labelText: "Password",
-                  hintText: "Enter your password",
+                  hintText: "Create your password",
                   errorText: passError,
-                  prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
+                  prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
                   suffixIcon: IconButton(
                     icon: Icon(
                       obscure ? Icons.visibility_off : Icons.visibility,
                       color: Colors.grey,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        obscure = !obscure;
-                      });
-                    },
+                    onPressed: () => setState(() => obscure = !obscure),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -137,40 +172,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.redAccent, width: 2),
+                    borderSide: const BorderSide(color: Colors.redAccent, width: 2),
                   ),
                   filled: true,
                   fillColor: Colors.grey.shade50,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 24),
 
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-
-
-
-
-
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.redAccent,
-                  ),
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ),
-              SizedBox(height: 16),
-
+              // ── Sign Up Button ────────────────────
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: login,
+                  onPressed: signUp,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     foregroundColor: Colors.white,
@@ -179,85 +194,70 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: Text(
-                    "Log In",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: const Text(
+                    "Sign Up",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
+              // ── Already have account ──────────────
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an account?",
+                      "Already have an account?",
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                     TextButton(
                       onPressed: () {
-
-
-        Navigator.push(context, MaterialPageRoute(builder: (_) =>  SignUpScreen()));
-
-
+                        // Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
                       },
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.redAccent,
-                      ),
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+                      style: TextButton.styleFrom(foregroundColor: Colors.redAccent),
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
 
+              // ── OR Divider ────────────────────────
               Row(
                 children: [
                   Expanded(child: Divider(color: Colors.grey.shade300)),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      "OR",
-                      style: TextStyle(color: Colors.grey[500]),
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text("OR", style: TextStyle(color: Colors.grey[500])),
                   ),
                   Expanded(child: Divider(color: Colors.grey.shade300)),
                 ],
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
 
+              // ── Google Button ─────────────────────
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: OutlinedButton.icon(
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   icon: Image.asset(
                     'images/google_logo.png',
                     height: 24,
                     width: 24,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(Icons.g_mobiledata, color: Colors.red, size: 30);
-                    },
+                    errorBuilder: (_, __, ___) =>
+                        const Icon(Icons.g_mobiledata, color: Colors.red, size: 30),
                   ),
-                  label: Text(
+                  label: const Text(
                     "Continue With Google",
                     style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                        color: Colors.black87,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
                   ),
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(color: Colors.grey.shade300),
@@ -267,28 +267,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
 
+              // ── Facebook Button ───────────────────
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton.icon(
-                  onPressed: () {
-
-
-
-                  },
-                  icon: Icon(Icons.facebook, color: Colors.white, size: 24),
-                  label: Text(
+                  onPressed: () {},
+                  icon: const Icon(Icons.facebook, color: Colors.white, size: 24),
+                  label: const Text(
                     "Continue With Facebook",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF1877F2), 
+                    backgroundColor: const Color(0xFF1877F2),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -296,7 +292,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),

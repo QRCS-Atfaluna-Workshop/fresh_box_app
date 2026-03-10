@@ -107,7 +107,7 @@ class RecommendedCard extends StatelessWidget {
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(50), // صورة دائرية كما في التصميم
+            borderRadius: BorderRadius.circular(50), 
             child: Image.network(item.imageUrl, width: 60, height: 60, fit: BoxFit.cover),
           ),
           const SizedBox(width: 16),

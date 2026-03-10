@@ -51,7 +51,6 @@ class MoreScreen extends StatelessWidget {
     (Icons.facebook_outlined, 'Message to facebook page'),
   ];
 
-// late TextEditingController textcontroller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +66,6 @@ class MoreScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
-            // User card
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -120,7 +118,6 @@ CircleAvatar(
               ),
             ),
             const SizedBox(height: 16),
-            // Menu list
             Expanded(
               child: ListView.separated(
                 itemCount: _menuItems.length + 1, 
@@ -305,7 +302,6 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  // Name & price row
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -330,7 +326,6 @@ class ProductDetailsScreen extends StatelessWidget {
                       style: const TextStyle(
                           color: Colors.grey, fontWeight: FontWeight.w500)),
                   const SizedBox(height: 8),
-                  // Category
                   Row(
                     children: [
                       const Icon(Icons.grid_view,
@@ -342,7 +337,6 @@ class ProductDetailsScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  // Description
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -360,13 +354,11 @@ class ProductDetailsScreen extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 14)),
                   const SizedBox(height: 12),
-                  // Related products
                   ..._relatedProducts.map((p) => _RelatedProductCard(product: p)),
                 ],
               ),
             ),
           ),
-          // Add to Bag button
           Padding(
             padding: const EdgeInsets.all(16),
             child: SizedBox(
