@@ -5,7 +5,7 @@ void main() {
 
 
 class MyUltimateApp extends StatefulWidget {
-   MyUltimateApp({super.key});
+   const MyUltimateApp({super.key});
 
   @override
   State<MyUltimateApp> createState() => _MyUltimateAppState();
@@ -21,7 +21,7 @@ class _MyUltimateAppState extends State<MyUltimateApp> {
 }
 
 class MyMasterComplexUI extends StatefulWidget {
-   MyMasterComplexUI({super.key});
+   const MyMasterComplexUI({super.key});
 
   @override
   _MyMasterComplexUIState createState() => _MyMasterComplexUIState();

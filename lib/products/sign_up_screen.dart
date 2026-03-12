@@ -3,6 +3,8 @@ import 'package:pro/products/food_app.dart';
 import 'package:pro/products/login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }

@@ -5,7 +5,7 @@ void main() {
 }
 
 class FourthApp extends StatefulWidget {
-   FourthApp({super.key});
+   const FourthApp({super.key});
 
   @override
   State<FourthApp> createState() => _FourthAppState();
