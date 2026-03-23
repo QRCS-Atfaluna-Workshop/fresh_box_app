@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pro/products/food_app.dart';
-import 'package:pro/products/login_screen.dart';
+import 'package:pro/products/restaurant_app/food_app.dart';
+import 'package:pro/products/restaurant_app/login_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+   const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -40,9 +41,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
 
       if (usernameError == null && emailError == null && passError == null) {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => const PopularFoodScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (_) =>  PopularFoodScreen()));
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+           SnackBar(
             content: Text('Account created successfully!'),
             backgroundColor: Colors.green,
           ),
@@ -57,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       backgroundColor: Colors.white,
 
       appBar: AppBar(
-        title: const Text(
+        title:  Text(
           "FreshBOX",
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -71,25 +72,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding:  EdgeInsets.all(24.r),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              const Text(
+               Text(
                 "Let's get Started",
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: 28.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
               ),
-              const SizedBox(height: 8),
+               SizedBox(height: 8.h),
               Text(
                 "Create an account to continue!",
-                style: TextStyle(color: Colors.grey[600], fontSize: 16),
+                style: TextStyle(color: Colors.grey[600], fontSize: 16.sp),
               ),
-              const SizedBox(height: 32),
+               SizedBox(height: 32.h),
 
               TextField(
                 controller: usernameController,
@@ -98,24 +99,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: "Username",
                   hintText: "Create your username",
                   errorText: usernameError,
-                  prefixIcon: const Icon(Icons.person_outline, color: Colors.grey),
+                  prefixIcon:  Icon(Icons.person_outline, color: Colors.grey),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide(color: Colors.grey.shade300),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r  ),
                     borderSide: BorderSide(color: Colors.grey.shade300),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide:  BorderSide(color: Colors.redAccent, width: 2),
                   ),
                   filled: true,
                   fillColor: Colors.grey.shade50,
                 ),
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: 16.h),
 
               TextField(
                 controller: emailController,
@@ -125,24 +126,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: "Email Id",
                   hintText: "Enter your e-mail",
                   errorText: emailError,
-                  prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey),
+                  prefixIcon:  Icon(Icons.email_outlined, color: Colors.grey),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide(color: Colors.grey.shade300),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide(color: Colors.grey.shade300),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide:  BorderSide(color: Colors.redAccent, width: 2),
                   ),
                   filled: true,
                   fillColor: Colors.grey.shade50,
                 ),
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: 16.h),
 
               TextField(
                 controller: passwordController,
@@ -151,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: "Password",
                   hintText: "Create your password",
                   errorText: passError,
-                  prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
+                  prefixIcon:  Icon(Icons.lock_outline, color: Colors.grey),
                   suffixIcon: IconButton(
                     icon: Icon(
                       obscure ? Icons.visibility_off : Icons.visibility,
@@ -160,26 +161,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onPressed: () => setState(() => obscure = !obscure),
                   ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide(color: Colors.grey.shade300),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide(color: Colors.grey.shade300),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide:  BorderSide(color: Colors.redAccent, width: 2),
                   ),
                   filled: true,
                   fillColor: Colors.grey.shade50,
                 ),
               ),
-              const SizedBox(height: 24),
+               SizedBox(height: 24.h),
 
               SizedBox(
                 width: double.infinity,
-                height: 50,
+                height: 50.h,
                 child: ElevatedButton(
                   onPressed: signUp,
                   style: ElevatedButton.styleFrom(
@@ -187,16 +188,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                   ),
-                  child: const Text(
+                  child:  Text(
                     "Sign Up",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
 
               Center(
                 child: Row(
@@ -211,80 +212,80 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
                       },
                       style: TextButton.styleFrom(foregroundColor: Colors.redAccent),
-                      child: const Text(
+                      child:  Text(
                         "Login",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 30),
+               SizedBox(height: 30.h),
 
               Row(
                 children: [
                   Expanded(child: Divider(color: Colors.grey.shade300)),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding:  EdgeInsets.symmetric(horizontal: 16.h),
                     child: Text("OR", style: TextStyle(color: Colors.grey[500])),
                   ),
                   Expanded(child: Divider(color: Colors.grey.shade300)),
                 ],
               ),
-              const SizedBox(height: 30),
+               SizedBox(height: 30.h),
 
               SizedBox(
                 width: double.infinity,
-                height: 50,
+                height: 50.h,
                 child: OutlinedButton.icon(
                   onPressed: () {},
                   icon: Image.asset(
                     'images/google_logo.png',
-                    height: 24,
-                    width: 24,
+                    height: 24.h,
+                    width: 24.w,
                     errorBuilder: (_, __, ___) =>
-                        const Icon(Icons.g_mobiledata, color: Colors.red, size: 30),
+                         Icon(Icons.g_mobiledata, color: Colors.red, size: 30.sp),
                   ),
-                  label: const Text(
+                  label:  Text(
                     "Continue With Google",
                     style: TextStyle(
                         color: Colors.black87,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w500),
                   ),
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(color: Colors.grey.shade300),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+               SizedBox(height: 12.h),
 
               SizedBox(
                 width: double.infinity,
-                height: 50,
+                height: 50.h,
                 child: ElevatedButton.icon(
                   onPressed: () {},
-                  icon: const Icon(Icons.facebook, color: Colors.white, size: 24),
-                  label: const Text(
+                  icon:  Icon(Icons.facebook, color: Colors.white, size: 24.sp),
+                  label:  Text(
                     "Continue With Facebook",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w500),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1877F2),
+                    backgroundColor:  Color(0xFF1877F2),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
             ],
           ),
         ),

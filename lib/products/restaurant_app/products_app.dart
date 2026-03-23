@@ -1,24 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pro/products/notifications_screen.dart';
+import 'package:pro/products/restaurant_app/notifications_screen.dart';
 
-void main() => runApp( MyApp());
 
-class MyApp extends StatelessWidget {
-   const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4CAF50)),
-        useMaterial3: true,
-      ),
-      home:  MoreScreen(),
-    );
-  }
-}
 
 
 class Product {

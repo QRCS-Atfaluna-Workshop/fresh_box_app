@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-void main() {
-  runApp( MyUltimateApp());
-}
+
 
 
 class MyUltimateApp extends StatefulWidget {

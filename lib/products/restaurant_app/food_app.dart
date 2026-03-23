@@ -1,26 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pro/products/restaurant_app/food_details_screen.dart';
 import 'food_models.dart';
 import 'food_widgets.dart';
 
-void main() => runApp(const FoodApp());
 
-class FoodApp extends StatelessWidget {
-  const FoodApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'sans-serif',
-        scaffoldBackgroundColor: AppColors.bg,
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
-        useMaterial3: true,
-      ),
-      home: const PopularFoodScreen(),
-    );
-  }
-}
 
 class CartState extends ChangeNotifier {
   final List<CartItem> items = [
@@ -179,7 +162,7 @@ class _PopularFoodScreenState extends State<PopularFoodScreen> {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
+        title: Text(
           'Popular Food',
           style: TextStyle(
             color: AppColors.text,
@@ -212,6 +195,15 @@ class _PopularFoodScreenState extends State<PopularFoodScreen> {
                     : _favorites.add(_popularItems[i].id),
               ),
               onAdd: () => setState(() => _cart.add(_popularItems[i])),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => FoodDetailScreen(
+                    item: _popularItems[i],
+                    cart: _cart,
+                  ),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 10),
