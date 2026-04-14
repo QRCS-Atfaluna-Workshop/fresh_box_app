@@ -181,9 +181,9 @@ class _PopularFoodScreenState extends State<PopularFoodScreen> {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
-              childAspectRatio: 0.7,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio:.55,
             ),
             itemCount: _popularItems.length,
             itemBuilder: (_, i) => FoodCard(
@@ -245,29 +245,31 @@ class _PopularFoodScreenState extends State<PopularFoodScreen> {
               onAdd: () => setState(() => _cart.add(item)),
             ),
           ),
-          const SizedBox(height: 20),
-           ElevatedButton(
-            onPressed: () {  Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => CartScreen(cart: _cart)),
-            );},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              minimumSize: const Size(double.infinity, 56),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+           Padding(
+             padding: const EdgeInsets.all(16.0),
+             child: ElevatedButton(
+              onPressed: () {  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => CartScreen(cart: _cart)),
+              );},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                minimumSize: const Size(double.infinity, 56),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0,
               ),
-              elevation: 0,
-            ),
-            child: const Text(
-              'Go to Cart',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+              child: const Text(
+                'Go to Cart',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ),
+                       ),
+           ),
          
         ],
       ),
@@ -379,23 +381,26 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 32),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              minimumSize: const Size(double.infinity, 56),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                minimumSize: const Size(double.infinity, 56),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0,
               ),
-              elevation: 0,
-            ),
-            child: const Text(
-              'Process to Payment',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+              child: const Text(
+                'Process to Payment',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

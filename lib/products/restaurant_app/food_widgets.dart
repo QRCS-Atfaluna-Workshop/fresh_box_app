@@ -205,15 +205,13 @@ class AppColors {
   static const lightGrey = Color(0xFFF2F2F2);
 }
 
-// ══════════════════════════════════════════════════
-//  FoodCard  ✅ أضفنا GestureDetector للـ onTap
-// ══════════════════════════════════════════════════
+
 class FoodCard extends StatelessWidget {
   final FoodItem item;
   final bool isFavorite;
   final VoidCallback onFavorite;
   final VoidCallback onAdd;
-  final VoidCallback onTap; // ✅ الـ callback موجود
+  final VoidCallback onTap; 
 
   const FoodCard({
     super.key,
@@ -226,7 +224,6 @@ class FoodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ الإصلاح الرئيسي: لف الكارد بـ GestureDetector
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -246,7 +243,6 @@ class FoodCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Image + discount badge ────────────
             Stack(
               children: [
                 Padding(
@@ -258,7 +254,6 @@ class FoodCard extends StatelessWidget {
                       height: 200,
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      // ✅ errorBuilder لو الصورة ما حملت
                       errorBuilder: (_, __, ___) => Container(
                         height: 200,
                         decoration: BoxDecoration(
@@ -299,12 +294,10 @@ class FoodCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                // ✅ أيقونة المفضلة فوق الصورة
                 Positioned(
                   top: 12,
                   right: 12,
                   child: GestureDetector(
-                    // ✅ نمنع الـ tap من الوصول للـ Card
                     onTap: () {
                       onFavorite();
                     },
@@ -331,7 +324,6 @@ class FoodCard extends StatelessWidget {
               ],
             ),
 
-            // ── Name ─────────────────────────────
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Text(
@@ -346,7 +338,6 @@ class FoodCard extends StatelessWidget {
               ),
             ),
 
-            // ── Info row ─────────────────────────
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
               child: Row(
@@ -362,7 +353,6 @@ class FoodCard extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 11, color: AppColors.grey)),
                   const Spacer(),
-                  // ✅ السعر
                   Text(
                     '\$${item.price.toInt()}',
                     style: const TextStyle(
@@ -381,9 +371,6 @@ class FoodCard extends StatelessWidget {
   }
 }
 
-// ══════════════════════════════════════════════════
-//  RecommendedCard
-// ══════════════════════════════════════════════════
 class RecommendedCard extends StatelessWidget {
   final FoodItem item;
   final VoidCallback onAdd;
@@ -446,7 +433,6 @@ class RecommendedCard extends StatelessWidget {
               ],
             ),
           ),
-          // ✅ زر إضافة للكارد
           GestureDetector(
             onTap: onAdd,
             child: Container(
@@ -464,9 +450,6 @@ class RecommendedCard extends StatelessWidget {
   }
 }
 
-// ══════════════════════════════════════════════════
-//  CartItemTile
-// ══════════════════════════════════════════════════
 class CartItemTile extends StatelessWidget {
   final CartItem item;
   final VoidCallback onIncrement;
@@ -516,7 +499,6 @@ class CartItemTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Name
                 Text(
                   item.food.name,
                   style: const TextStyle(
@@ -525,7 +507,6 @@ class CartItemTile extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
-                // Rating
                 Row(
                   children: [
                     const Icon(Icons.star, color: Colors.green, size: 12),
@@ -537,7 +518,6 @@ class CartItemTile extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 6),
-                // Price + Qty controls
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -580,7 +560,6 @@ class CartItemTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          // ✅ زر الإضافة بلون مميز
           color: icon == Icons.add
               ? AppColors.primary.withOpacity(0.1)
               : Colors.grey.shade200,
